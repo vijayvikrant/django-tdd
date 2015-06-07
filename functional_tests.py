@@ -29,6 +29,16 @@ class HomePageTest(unittest.TestCase):
         input_box.send_keys("Buy peacock feathers")
         input_box.send_keys("\n")
 
+        # When she hits enter, the page updates, and now the page lists
+        # "1: Buy peacock feathers" as an item in a to-do list
+        table = self.browser.find_element_by_id('id_list_table')
+        rows = table.find_elements_by_tag_name('tr')
+        time.sleep(10)
+        self.assertIn(
+            'Buy peacock feathers',
+            [row.text for row in rows]
+        )
+
         # The below line will always make the test fail
         # force error for tests that are not completed
         #self.fail('finish the test!')
